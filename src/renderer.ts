@@ -1,6 +1,5 @@
 import { transformerColorizedBrackets } from '@shikijs/colorized-brackets'
 import { transformerMetaHighlight, transformerNotationDiff, transformerNotationErrorLevel, transformerNotationFocus, transformerNotationHighlight } from '@shikijs/transformers'
-import transformerFigcaption from './highlight'
 import { MarkdownItAsync } from 'markdown-it-async'
 import { fromAsyncCodeToHtml } from '@shikijs/markdown-it/async'
 import { codeToHtml } from 'shiki'
@@ -23,65 +22,68 @@ import container from './container'
 import excerpt from './excerpt'
 import katex from './katex'
 import furigana from './furigana/index'
-import markdownItShiki from '@shikijs/markdown-it'
+
+const md = new MarkdownItAsync({
+  warnOnSyncRender: true,
+  html: false,
+  xhtmlOut: true,
+  breaks: true,
+  linkify: true,
+  typographer: false,
+  quotes: "“”‘’",
+})
+
+md.use(
+  fromAsyncCodeToHtml(
+    codeToHtml,
+    {
+      themes: {
+        light: 'vitesse-light',
+        dark: 'vitesse-dark',
+      },
+      transformers: [
+        transformerNotationDiff(),
+        transformerNotationHighlight(),
+        transformerNotationFocus(),
+        transformerNotationErrorLevel(),
+        transformerMetaHighlight(),
+        transformerColorizedBrackets()
+      ]
+    },
+  )
+)
+
+md.use(markdownItAbbr)
+markdownItAttrs(md as any)
+md.use(markdownItBracketedSpans)
+md.use(markdownItDeflist)
+md.use(markdownItEmoji)
+md.use(markdownItIns)
+md.use(markdownItMark)
+md.use(markdownItMultimdTable, {
+  multiline: true,
+  rowspan: true,
+  headerless: true
+})
+md.use(markdownItSub)
+md.use(markdownItSup)
+md.use(markdownItTaskCheckBox)
+md.use(markdownItTocAndAnchor, {
+  tocClassName: "toc",
+  anchorClassName: "anchor"
+})
+md.use(markdownItSpoiler, {
+  title: "你知道得太多了"
+})
+container(md)
+md.use(excerpt)
+md.use(katex)
+furigana(md, {fallbackParens: "()"})
+
 
 export default async function (data: StoreFunctionData) {
   if (!data.text) {
     return ''
   }
-  const md = new MarkdownItAsync({
-    warnOnSyncRender: true,
-    html: false,
-    xhtmlOut: true,
-    breaks: true,
-    linkify: true,
-    typographer: false,
-    quotes: "“”‘’",
-  })
-
-  md.use(await markdownItShiki({
-    themes: {
-      light: 'vitesse-light',
-      dark: 'vitesse-dark',
-    },
-    transformers: [
-      transformerNotationDiff(),
-      transformerNotationHighlight(),
-      transformerNotationFocus(),
-      transformerNotationErrorLevel(),
-      transformerMetaHighlight(),
-      transformerColorizedBrackets(),
-      transformerFigcaption()
-    ]
-  },
-  ))
-
-  md.use(markdownItAbbr)
-  markdownItAttrs(md as any)
-  md.use(markdownItBracketedSpans)
-  md.use(markdownItDeflist)
-  md.use(markdownItEmoji)
-  md.use(markdownItIns)
-  md.use(markdownItMark)
-  md.use(markdownItMultimdTable, {
-    multiline: true,
-    rowspan: true,
-    headerless: true
-  })
-  md.use(markdownItSub)
-  md.use(markdownItSup)
-  md.use(markdownItTaskCheckBox)
-  md.use(markdownItTocAndAnchor, {
-    tocClassName: "toc",
-    anchorClassName: "anchor"
-  })
-  md.use(markdownItSpoiler, {
-    title: "你知道得太多了"
-  })
-  container(md)
-  md.use(excerpt)
-  md.use(katex)
-  furigana(md, {fallbackParens: "()"})
-
   return await md.renderAsync(data.text)
 }
