@@ -1,0 +1,39 @@
+{
+  "name": "hexo-renderer-aether",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "zkz098",
+  "license": "MIT",
+  "packageManager": "pnpm@10.7.0",
+  "dependencies": {
+    "@shikijs/colorized-brackets": "^3.2.2",
+    "@shikijs/markdown-it": "^3.2.2",
+    "@shikijs/transformers": "^3.2.2",
+    "@shikijs/types": "^3.2.2",
+    "@types/markdown-it": "^14.1.2",
+    "esbuild": "^0.25.2",
+    "glob": "^11.0.1",
+    "hexo": "^7.3.0",
+    "markdown-it": "^14.1.0",
+    "markdown-it-abbr": "^2.0.0",
+    "markdown-it-async": "^2.2.0",
+    "markdown-it-attrs": "^4.3.1",
+    "markdown-it-bracketed-spans": "^1.0.1",
+    "markdown-it-deflist": "^3.0.0",
+    "markdown-it-emoji": "^3.0.0",
+    "markdown-it-ins": "^4.0.0",
+    "markdown-it-mark": "^4.0.0",
+    "markdown-it-multimd-table": "^4.2.3",
+    "markdown-it-sub": "^2.0.0",
+    "markdown-it-sup": "^2.0.0",
+    "markdown-it-task-checkbox": "^1.0.6",
+    "markdown-it-toc-and-anchor": "^4.2.0",
+    "shiki": "^3.2.2",
+    "typescript": "^5.8.3"
+  }
+}
