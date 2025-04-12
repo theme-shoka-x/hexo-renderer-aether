@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node compiler.mjs"
   },
   "keywords": [],
   "author": "zkz098",
@@ -19,11 +19,13 @@
     "esbuild": "^0.25.2",
     "glob": "^11.0.1",
     "hexo": "^7.3.0",
+    "katex": "^0.16.22",
     "markdown-it": "^14.1.0",
     "markdown-it-abbr": "^2.0.0",
     "markdown-it-async": "^2.2.0",
     "markdown-it-attrs": "^4.3.1",
     "markdown-it-bracketed-spans": "^1.0.1",
+    "markdown-it-container": "^4.0.0",
     "markdown-it-deflist": "^3.0.0",
     "markdown-it-emoji": "^3.0.0",
     "markdown-it-ins": "^4.0.0",

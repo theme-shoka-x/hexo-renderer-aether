@@ -1,6 +1,6 @@
 /*
 ShokaX ToolBox - Compiler
-compatibility: ShokaX v0.5.x-dev
+compatibility: ShokaX Aether Renderer 0.x
  */
 import fs from 'fs/promises'
 import { glob } from 'glob'
@@ -11,7 +11,6 @@ console.log('Start compiling...')
 
 const entryPoints = await glob('./**/*.ts');
 
-console.log('RUN THIS SCRIPT IN YOUR SHOKAX THEME ROOT DIRECTORY!')
 console.log('Using esbuild compiler...')
 
 await build({
@@ -21,7 +20,7 @@ await build({
     target: ['esnext'],
     platform: 'node',
     loader: { '.ts': 'ts' },
-    outdir: 'scripts'
+    outdir: '.'
 })
 
 console.log('deleting ts files...')
