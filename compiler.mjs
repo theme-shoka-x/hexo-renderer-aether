@@ -9,12 +9,10 @@ import { build } from 'esbuild'
 console.log('ShokaX ToolBox - Compiler')
 console.log('Start compiling...')
 
-const entryPoints = await glob('./**/*.ts');
-
 console.log('Using esbuild compiler...')
 
 await build({
-    entryPoints: entryPoints,
+    entryPoints: './index.ts',
     bundle: true,
     external: [
         'shiki'
@@ -23,7 +21,8 @@ await build({
     target: ['esnext'],
     platform: 'node',
     loader: { '.ts': 'ts' },
-    outdir: '.'
+    outfile: 'index.js',
+    resolveExtensions: ['.mjs', '.js', '.json', '.ts']
 })
 
 console.log('deleting ts files...')
