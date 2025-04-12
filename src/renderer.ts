@@ -23,6 +23,7 @@ import container from './container'
 import excerpt from './excerpt'
 import katex from './katex'
 import furigana from './furigana/index'
+import markdownItShiki from '@shikijs/markdown-it'
 
 const md = new MarkdownItAsync({
   warnOnSyncRender: true,
@@ -31,29 +32,25 @@ const md = new MarkdownItAsync({
   breaks: true,
   linkify: true,
   typographer: false,
-  quotes: "“”‘’"
+  quotes: "“”‘’",
 })
 
-md.use(
-  fromAsyncCodeToHtml(
-    codeToHtml,
-    {
-      themes: {
-        light: 'vitesse-light',
-        dark: 'vitesse-dark',
-      },
-      transformers: [
-        transformerNotationDiff(),
-        transformerNotationHighlight(),
-        transformerNotationFocus(),
-        transformerNotationErrorLevel(),
-        transformerMetaHighlight(),
-        transformerColorizedBrackets(),
-        transformerFigcaption()
-      ]
-    },
-  )
-)
+md.use(await markdownItShiki({
+  themes: {
+    light: 'vitesse-light',
+    dark: 'vitesse-dark',
+  },
+  transformers: [
+    transformerNotationDiff(),
+    transformerNotationHighlight(),
+    transformerNotationFocus(),
+    transformerNotationErrorLevel(),
+    transformerMetaHighlight(),
+    transformerColorizedBrackets(),
+    transformerFigcaption()
+  ]
+},
+))
 
 md.use(markdownItAbbr)
 markdownItAttrs(md as any)
