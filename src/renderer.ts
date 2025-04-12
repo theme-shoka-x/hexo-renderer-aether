@@ -80,7 +80,7 @@ md.use(markdownItSpoiler, {
 container(md)
 md.use(excerpt)
 md.use(katex)
-furigana(md)
+furigana(md, {fallbackParens: "()"})
 
 
 export default async function (data: StoreFunctionData) {

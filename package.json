@@ -7,6 +7,7 @@
     "build": "node compiler.mjs"
   },
   "keywords": [],
+  "type": "commonjs",
   "author": "zkz098",
   "license": "MIT",
   "packageManager": "pnpm@10.7.0",

@@ -15,7 +15,10 @@ console.log('Using esbuild compiler...')
 
 await build({
     entryPoints: entryPoints,
-    bundle: false,
+    bundle: true,
+    external: [
+        'shiki'
+    ],
     format: 'cjs',
     target: ['esnext'],
     platform: 'node',
