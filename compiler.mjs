@@ -9,6 +9,8 @@ import { build } from 'esbuild'
 console.log('ShokaX ToolBox - Compiler')
 console.log('Start compiling...')
 
+const entryPoints = await glob('./**/*.ts');
+
 console.log('Using esbuild compiler...')
 
 await build({
@@ -21,7 +23,7 @@ await build({
     target: ['esnext'],
     platform: 'node',
     loader: { '.ts': 'ts' },
-    outfile: 'index.js',
+    outdir: 'index.js',
     resolveExtensions: ['.mjs', '.js', '.json', '.ts']
 })
 
