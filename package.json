@@ -21,7 +21,7 @@
     "glob": "^11.0.1",
     "hexo": "^7.3.0",
     "katex": "^0.16.22",
-    "markdown-it": "^14.1.0",
+    "markdown-it": "^13.0.2",
     "markdown-it-abbr": "^2.0.0",
     "markdown-it-async": "^2.2.0",
     "markdown-it-attrs": "^4.3.1",
