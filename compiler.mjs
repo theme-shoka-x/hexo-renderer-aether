@@ -14,7 +14,7 @@ const entryPoints = await glob('./**/*.ts');
 console.log('Using esbuild compiler...')
 
 await build({
-    entryPoints: './index.ts',
+    entryPoints: ['./index.ts'],
     bundle: true,
     external: [
         'shiki'
